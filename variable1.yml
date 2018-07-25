@@ -1,0 +1,15 @@
+---
+#arun
+- hosts: machine1
+  vars:
+    - var1: variable1
+    - var2: variable2
+  vars_prompt:
+    - name: var3
+      prompt: enter the user you want to create > 
+  tasks:
+    - name: task1
+      block:
+        - shell: echo '{{ var1 }}' > /home/ansible/variable.txt
+        - file: path='/home/ansible/{{ var1 }}.txt' state=touch
+        - user: name='{{ var3 }}' state=present

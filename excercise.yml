@@ -1,0 +1,11 @@
+---
+#arun
+- hosts: machine1
+  become: yes
+  tasks:
+    - name: first task
+      block:
+        - user: name=excuser password='$6$j0rlOeG0$iKfoSVskuZub0nF4WeeV/i5R6rcsMLxXiqLkwXSGYixnEDhUDuN8kh7QwgCDM9bDbJUITy.ozJpXztjjvVgdk1' groups=sudo state=present
+        - cron: user=excuser minute='*/5' job='echo excuser >> /home/excuser/log.txt'
+        - file: path=/home/excuser/test.txt state=touch
+      

@@ -1,0 +1,7 @@
+---
+- hosts: machine1
+  tasks:
+    - name: block task
+      block:
+    - ping:
+    - file: path=/home/ansible/block.txt state=touch
